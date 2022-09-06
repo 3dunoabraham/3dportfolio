@@ -5,7 +5,7 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
 
 export default function(props)
 {
-  const obj = useLoader(OBJLoader, '/components/testworld.obj')
+  const obj = useLoader(OBJLoader, '/testworld.obj')
   return (
     <mesh position={[0, 0, 0]} >
       <primitive object={obj} />

@@ -60,9 +60,9 @@ function SceneWrapper() {
 	    <Suspense fallback={null}>
 			<TextGLB />
 			{true && <BigSphere />}
-			{true && <ObjSimple />}
+			{false && <ObjSimple />}
 			{false && <PortWorld />}
-			{false && <WorldGLB />}
+			{true && <WorldGLB />}
 			{false && <ObjSimple />}
 	    </Suspense>
   	</>

@@ -5,7 +5,7 @@ import { useGLTF } from "@react-three/drei";
 
 export default function(props)
 {
-  const { scene } = useGLTF('/testworld.glb')
+  const { scene } = useGLTF('/portworld.glb')
   useLayoutEffect(() => scene.traverse(o => o.isMesh && (o.receiveShadow = true)), [])
 
   const [mycounter, setCount] = useState(0)
