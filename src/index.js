@@ -14,6 +14,7 @@ import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
 
 import WorldGLB from './components/world-glb'
 import TextGLB from './components/text-glb'
+import TextGLBFront from './components/text-glb-front'
 import CameraControls from './components/camera-controls'
 import PlaneSimple from './components/plane-simple'
 import ObjSimple from './components/obj-simple'
@@ -25,12 +26,33 @@ extend({ OrbitControls });
 extend({ UnrealBloomPass })
 
 
-function PortWorld(props)
-{
-  const obj = useLoader(OBJLoader, 'testworld.obj')
-  return <primitive object={obj} />
-};
+function SunWrapper() {
+	const sunref = useRef();
+	const [mycounter, setCount] = useState(0)
 
+
+
+	 useFrame(({ mouse }) => {
+		setCount(mycounter+1)
+		if (!sunref.current) return
+
+		sunref.current.position.x = Math.cos(mycounter * 0.002 ) * 5
+		sunref.current.position.z = Math.sin(mycounter * 0.002 ) * 4
+
+	 	// if (mouse.x > 0.33 && mouse.y > 0.33)
+	 	// {
+			// if (sunref.current) sunref.current.position.y += (mouse.x+mouse.y)*0.001
+	 	// } else {
+	 	// }
+	 });
+
+  return <spotLight ref={sunref}
+			castShadow
+			intensity={2}
+			args={[0xffaa55, 1, 100]}
+			position={[0, 5, 0]}
+		/>
+}
 function AModalButton() {
   const [show, setShow] = useState(false)
   return (
@@ -57,11 +79,11 @@ function SceneWrapper() {
   	<>
   		<CameraControls />
 
-	    <Suspense fallback={null}>
-			<TextGLB />
-			{true && <BigSphere />}
+	    <Suspense fallback={null} >
+			{false && <TextGLB />}
+			<TextGLBFront />
+			{false && <BigSphere />}
 			{false && <ObjSimple />}
-			{false && <PortWorld />}
 			{true && <WorldGLB />}
 			{false && <ObjSimple />}
 	    </Suspense>
@@ -225,22 +247,28 @@ createRoot(document.getElementById('root')).render(
 		
 
 		<Stars />
-		{/* <color attach="background" args={["#94ebd8"]} /> */}
-		{/* <fog attach="fog" args={["#94ebd8", 0, 40]} /> */}
-		<ambientLight intensity={0.5} />
+		 <color attach="background" args={["#111111"]} /> 
+		<fog attach="fog" args={["#55aaff", 0, 30]} />
+		{/*<ambientLight intensity={1} />*/}
+		<SunWrapper />
 		<spotLight
 			castShadow
-			intensity={2}
-			args={[0xffaa55, 1, 100]}
-			position={[3, 4, -3]}
-		penumbra={0.5}
+			intensity={0.1}
+			args={[0x81d0eb, 1, 100]}
+			position={[-10, 0, 0]}
 		/>
 		<spotLight
 			castShadow
-			intensity={0.75}
-			args={[0x55aaff, 1, 100]}
-			position={[-3, 4, -3]}
-		penumbra={0.5}
+			intensity={1.5}
+			args={[0xffaa55, 1, 100]}
+			position={[0, 0, -4.75]}
+			penumbra={0.999}
+		/>
+		<spotLight
+			intensity={0.25}
+			args={[0xffaa55, 1, 100]}
+			position={[0, 4, 5.5]}
+			penumbra={0.999}
 		/>
 	    <RenderInBrowser except chrome>
 	        <EffectComposer multisampling={4}>

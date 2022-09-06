@@ -6,7 +6,7 @@ import { useGLTF } from "@react-three/drei";
 export default function(props)
 {
   const { scene } = useGLTF('/text.glb')
-  useLayoutEffect(() => scene.traverse(o => o.isMesh && (o.receiveShadow = true)), [])
+  useLayoutEffect(() => scene.traverse(o => o.isMesh && (o.castShadow = o.receiveShadow = true)), [])
 
   const [mycounter, setCount] = useState(0)
   const ref = useRef();
@@ -32,16 +32,17 @@ export default function(props)
     setCount(mycounter+1)
     // console.log(mycounter)
     // camera.position.x = Math.sin(mycounter * 0.002 ) * 2
-    ref.current.rotation.z = ( Math.cos(mycounter * 0.004 ) / 1.5 ) - ( mouse.x * 0.5 )
+    // ref.current.rotation.z = ( Math.cos(mycounter * 0.004 ) / 1.5 ) - ( mouse.x * 0.5 )
   })
 
-  return <primitive ref={ref}
+  return  <primitive ref={ref}
+            
             onClick={() => {
               console.log(ref)
             }}
-            position={[0,0,0]}
-            scale={[0.6,0.6,0.6]}
-            rotation={[3.14/2,0,0]}
+            position={[0,0,-3.95]}
+            scale={[0.1,0.1,0.1]}
+            rotation={[3.14/2,0,3.14]}
             object={scene}
              {...props} 
           />

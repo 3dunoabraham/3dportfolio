@@ -23,7 +23,9 @@ export default function(props)
     // console.log("asd", camera)
     // setCount(mycounter+1)
     // console.log(mycounter)
-    camera.position.z += 0.001
+    camera.position.z -= 0.001
+    camera.position.y += 0.0008
+    camera.position.x += 0.00001
     controls.current.update()
   });
   return (<>
@@ -33,7 +35,7 @@ export default function(props)
         args={[camera, domElement]}
         enableZoom={true}
         enablePan={false}
-        minDistance={4}
+        minDistance={4.2}
         maxDistance={32}
         maxPolarAngle={Math.PI/2 * 1.5}
         minPolarAngle={0}
