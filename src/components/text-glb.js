@@ -3,7 +3,8 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { useGLTF } from "@react-three/drei";
 
-const TextGLB = (props) => {
+export default function(props)
+{
   const { scene } = useGLTF('/text.glb')
   useLayoutEffect(() => scene.traverse(o => o.isMesh && (o.receiveShadow = true)), [])
 
@@ -38,12 +39,10 @@ const TextGLB = (props) => {
             onClick={() => {
               console.log(ref)
             }}
-            position={[0,1,-2]}
+            position={[0,0,0]}
             scale={[0.6,0.6,0.6]}
             rotation={[3.14/2,0,0]}
             object={scene}
              {...props} 
           />
-}
-
-export default TextGLB
+};

@@ -1,6 +1,7 @@
 import { usePlane } from "@react-three/cannon";
 
-function PlaneSimple() {
+export default function(props)
+{
   const [ref] = usePlane(() => ({
     rotation: [-Math.PI / 2, 0, 0],
     position: [0, -10, 0],
@@ -13,6 +14,4 @@ function PlaneSimple() {
       <meshStandardMaterial attach="material" color="lightblue" />
     </mesh>
   );
-}
-
-export default PlaneSimple
+};

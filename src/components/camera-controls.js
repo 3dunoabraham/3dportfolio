@@ -5,8 +5,9 @@ import { useThree, useFrame } from '@react-three/fiber'
 
   // maxAzimuthAngle={Math.PI/2}
   //  minAzimuthAngle={-Math.PI/2}
-  
-const CameraControls = () => {
+
+export default function(props)
+{
   // Get a reference to the Three.js Camera, and the canvas html element.
   // We need these to setup the OrbitControls component.
   // https://threejs.org/docs/#examples/en/controls/OrbitControls
@@ -38,6 +39,4 @@ const CameraControls = () => {
         minPolarAngle={0}
         />
       </>);
-  };
-
-export default CameraControls;
+};

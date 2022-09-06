@@ -1,10 +1,15 @@
+import * as THREE from "three";
+
 import { useLoader } from "@react-three/fiber";
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
 
-function ObjSimple() {
-  const obj = useLoader(OBJLoader, '/ngirls  .obj')
-  return <primitive object={obj} />
-}
-
-
-export default ObjSimple
+export default function(props)
+{
+  const obj = useLoader(OBJLoader, '/components/testworld.obj')
+  return (
+    <mesh position={[0, 0, 0]} >
+      <primitive object={obj} />
+      <meshStandardMaterial attach="material" color="gray" />
+    </mesh>
+  )
+};

@@ -10,7 +10,9 @@ import { UnrealBloomPass } from 'three-stdlib'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import { KernelSize } from 'postprocessing'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
 
+import WorldGLB from './components/world-glb'
 import TextGLB from './components/text-glb'
 import CameraControls from './components/camera-controls'
 import PlaneSimple from './components/plane-simple'
@@ -21,6 +23,13 @@ import "./styles.css";
 // Extend will make OrbitControls available as a JSX element called orbitControls for us to use.
 extend({ OrbitControls });
 extend({ UnrealBloomPass })
+
+
+function PortWorld(props)
+{
+  const obj = useLoader(OBJLoader, 'testworld.obj')
+  return <primitive object={obj} />
+};
 
 function AModalButton() {
   const [show, setShow] = useState(false)
@@ -49,7 +58,12 @@ function SceneWrapper() {
   		<CameraControls />
 
 	    <Suspense fallback={null}>
-			<TextGLB/>
+			<TextGLB />
+			{true && <BigSphere />}
+			{true && <ObjSimple />}
+			{false && <PortWorld />}
+			{false && <WorldGLB />}
+			{false && <ObjSimple />}
 	    </Suspense>
   	</>
   )
@@ -63,6 +77,24 @@ const smallboxes = [
   // [0.55, 17, 0.6],
 ];
 	
+function BigSphere() {
+	const redframe = useRef();
+
+	 useFrame(({ mouse }) => {
+	 	if (mouse.x > 0.33 && mouse.y > 0.33)
+	 	{
+			if (redframe.current) redframe.current.rotation.y += (mouse.x+mouse.y)*0.001
+	 	} else {
+	 	}
+	 });
+
+	return (<>
+		<mesh position={[0, 0, 0]} ref={redframe} receiveShadow castShadow>
+			<sphereBufferGeometry attach="geometry" args={[3.5, 36, 18, 5]} />
+			<meshStandardMaterial wireframe attach="material" color="gray" />
+		</mesh>
+	</>)
+}
 function BigBox() {
 
 	const smallBox = {
@@ -216,15 +248,15 @@ createRoot(document.getElementById('root')).render(
 	        </EffectComposer>
 	    </RenderInBrowser>
 
-		<Physics >
+		{false && <Physics >
 		    <Suspense fallback={null}>
-		        {smallboxes.map((position, idx) => (
+		        {false && smallboxes.map((position, idx) => (
 		          <SmallBox2 position={position} key={idx} />
 		        ))}
 				{/* <PlaneSimple /> */}
 	    	</Suspense>
 			<BigBox />
-		</Physics>
+		</Physics>}
 	</Canvas>
 	</div>
 );

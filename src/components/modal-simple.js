@@ -1,4 +1,5 @@
-const SimpleModal = ({ children, show, setShow }) => {
+export default function({ children, show, setShow })
+{
   const content = show && (
     <div className="overlay">
       <div className="modal">
@@ -53,6 +54,4 @@ const SimpleModal = ({ children, show, setShow }) => {
   )
 
   return content
-}
-
-export default SimpleModal
+};
