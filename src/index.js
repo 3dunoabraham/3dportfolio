@@ -80,11 +80,17 @@ function SceneWrapper() {
   		<CameraControls />
 
 	    <Suspense fallback={null} >
+			{true && <TextGLBFront />}
+	    	<RenderInBrowser except chrome>
+				{true && <WorldGLB />}
+	    	</RenderInBrowser>
+	    	<RenderInBrowser only chrome>
+				{true && <ObjSimple />}
+	    	</RenderInBrowser>
+
+
 			{false && <TextGLB />}
-			<TextGLBFront />
 			{false && <BigSphere />}
-			{false && <ObjSimple />}
-			{true && <WorldGLB />}
 			{false && <ObjSimple />}
 	    </Suspense>
   	</>
@@ -246,9 +252,9 @@ createRoot(document.getElementById('root')).render(
 		<SceneWrapper />
 		
 
-		<Stars />
+		{ <Stars /> }
 		 <color attach="background" args={["#111111"]} /> 
-		<fog attach="fog" args={["#55aaff", 0, 30]} />
+		
 		{/*<ambientLight intensity={1} />*/}
 		<SunWrapper />
 		<spotLight
@@ -257,7 +263,7 @@ createRoot(document.getElementById('root')).render(
 			args={[0x81d0eb, 1, 100]}
 			position={[-10, 0, 0]}
 		/>
-		<spotLight
+		{true && <><spotLight
 			castShadow
 			intensity={1.5}
 			args={[0xffaa55, 1, 100]}
@@ -269,8 +275,9 @@ createRoot(document.getElementById('root')).render(
 			args={[0xffaa55, 1, 100]}
 			position={[0, 4, 5.5]}
 			penumbra={0.999}
-		/>
+		/></>}
 	    <RenderInBrowser except chrome>
+	    	<fog attach="fog" args={["#55aaff", 0, 30]} />
 	        <EffectComposer multisampling={4}>
 	            <Bloom kernelSize={1} luminanceThreshold={0} luminanceSmoothing={0} intensity={0.2} />
 	        </EffectComposer>

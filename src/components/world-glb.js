@@ -66,8 +66,8 @@ export default function(props)
   // })
 
   return <>
-  <Overlay />
-  <primitive ref={ref}
+    {/* <Overlay /> */}
+    <primitive ref={ref}
             
             onClick={() => {
               console.log(ref)

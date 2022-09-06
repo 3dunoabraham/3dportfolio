@@ -25,17 +25,17 @@ export default function(props)
   //  });
 
 
-  useFrame(({ mouse }) => {
-    if (!ref.current) {
-      return;
-    }
-    setCount(mycounter+1)
-    // console.log(mycounter)
-    // camera.position.x = Math.sin(mycounter * 0.002 ) * 2
+  // useFrame(({ mouse }) => {
+  //   if (!ref.current) {
+  //     return;
+  //   }
+  //   setCount(mycounter+1)
+  //   // console.log(mycounter)
+  //   // camera.position.x = Math.sin(mycounter * 0.002 ) * 2
 
-    ref.current.rotation.z = ( mouse.x * 0.25 )
-    ref.current.rotation.x = 1.6-( mouse.y * 0.75 )
-  })
+  //   ref.current.rotation.z = ( mouse.x * 0.25 )
+  //   ref.current.rotation.x = 1.6-( mouse.y * 0.75 )
+  // })
 
   return  <primitive ref={ref}
             
@@ -44,6 +44,7 @@ export default function(props)
             }}
             position={[0,0.42,4.2]}
             scale={[0.05,0.05,0.05]}
+            rotation={[1.6,0,0]}
             object={scene}
              {...props} 
           />
