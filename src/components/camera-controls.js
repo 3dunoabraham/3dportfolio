@@ -5,6 +5,7 @@ import { useThree, useFrame } from '@react-three/fiber'
 
   // maxAzimuthAngle={Math.PI/2}
   //  minAzimuthAngle={-Math.PI/2}
+        // maxPolarAngle={Math.PI/2 * 1.5}
 
 export default function(props)
 {
@@ -19,13 +20,29 @@ export default function(props)
   // Ref to the controls, so that we can update them on every frame using useFrame
   const controls = useRef();
   useFrame((state) => {
+    const multiplier = 100
+    const xStep = 0.001
+    const yStep = 0.08
+    const zStep = 0.1
     // console.log("asd")
     // console.log("asd", camera)
     // setCount(mycounter+1)
     // console.log(mycounter)
-    camera.position.z -= 0.001
-    camera.position.y += 0.0008
-    camera.position.x += 0.00001
+    camera.position.z -= zStep/multiplier
+    if (camera.position.z < 0)
+    {
+      if (camera.position.y > -3.5)
+      {
+        camera.position.y -= yStep/multiplier * 2
+      }
+    } else {
+      if (camera.position.y < 5.5)
+      {
+        camera.position.y += yStep/multiplier
+      }
+    }
+
+    camera.position.x += xStep/multiplier
     controls.current.update()
   });
   return (<>
@@ -37,7 +54,6 @@ export default function(props)
         enablePan={false}
         minDistance={4.2}
         maxDistance={32}
-        maxPolarAngle={Math.PI/2 * 1.5}
         minPolarAngle={0}
         />
       </>);

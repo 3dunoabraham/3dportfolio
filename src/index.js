@@ -80,7 +80,7 @@ function SceneWrapper() {
   		<CameraControls />
 
 	    <Suspense fallback={null} >
-			{true && <TextGLBFront />}
+			{false && <TextGLBFront />}
 	    	<RenderInBrowser except chrome>
 				{true && <WorldGLB />}
 	    	</RenderInBrowser>
