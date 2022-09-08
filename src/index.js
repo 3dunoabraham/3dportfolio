@@ -255,7 +255,7 @@ createRoot(document.getElementById('root')).render(
 		{ <Stars /> }
 		 <color attach="background" args={["#111111"]} /> 
 		
-		{/*<ambientLight intensity={1} />*/}
+		{false && <ambientLight intensity={0.1} />}
 		<SunWrapper />
 		<spotLight
 			castShadow

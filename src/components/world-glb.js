@@ -11,23 +11,23 @@ function Overlay(props)
   const [mycounter, setCount] = useState(0)
   const ref = useRef();
 
-  // useFrame(({ mouse }) => {
-  //    if (mouse.x > 0.33 && mouse.y > 0.33)
-  //    {
-  //     ref.current.rotation.y += (-mouse.y * 0.01 + mouse.x * 0.8) * 0.001
-  //    }
-  //  });
+  return <primitive ref={ref}
+            
+            onClick={() => {
+              console.log(ref)
+            }}
+            object={scene}
+             {...props} 
+          />
+};
 
+function TextBio(props)
+{
+  const { scene } = useGLTF('/portworld-text.glb')
+  // useLayoutEffect(() => scene.traverse(o => o.isMesh && (o.castShadow = o.receiveShadow = true)), [])
 
-  // useFrame(({ mouse }) => {
-    // if (!ref.current) {
-    //   return;
-    // }
-    // setCount(mycounter+1)
-    // console.log(mycounter)
-    // camera.position.x = Math.sin(mycounter * 0.002 ) * 2
-    // ref.current.rotation.z = ( Math.cos(mycounter * 0.04 ) / 1.5 ) - ( mouse.x * 0.5 )
-  // })
+  const [mycounter, setCount] = useState(0)
+  const ref = useRef();
 
   return <primitive ref={ref}
             
@@ -66,6 +66,7 @@ export default function(props)
   // })
 
   return <>
+    <TextBio /> 
     <Overlay /> 
     <primitive ref={ref}
             
