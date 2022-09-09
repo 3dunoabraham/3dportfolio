@@ -30,6 +30,11 @@ export default function({ children, show, setShow })
                     </small>
                 </a>
 
+                    <a href="https://github.com/3dunoabraham/" target="_blank">
+                      <small>
+                        Github | <small>3dunoabraham</small>
+                    </small>
+                </a>
                     <a href="https://dunoabraham.artstation.com/" target="_blank">
                       <small>
                         Artstation | <small>@dunoabraham</small>
