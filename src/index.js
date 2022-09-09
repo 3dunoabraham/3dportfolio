@@ -327,6 +327,12 @@ createRoot(document.getElementById('root')).render(
 			position={[0, 0, 5]}
 			penumbra={0.999}
 		/>
+			<spotLight 
+			intensity={0.25}
+			args={[0xffaa55, 1, 100]}
+			position={[0, -5, 0]}
+			penumbra={0.999}
+		/>
 
 		{<RoundEarthSun />}
 		{<RoundEarthSun2 />}
