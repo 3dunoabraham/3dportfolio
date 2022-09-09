@@ -34,8 +34,8 @@ function RoundEarthSun()
 		setCount(mycounter+1)
 		if (!sunref.current) return
 
-		sunref.current.position.x = Math.cos(mycounter * 0.002 ) * 5
-		sunref.current.position.z = Math.sin(mycounter * 0.002 ) * 3.5 - 1.5
+		sunref.current.position.x = Math.cos(mycounter * 0.005 ) * 5
+		sunref.current.position.z = -Math.sin(mycounter * 0.005 ) * 3 - 1.9
 
 	 	// if (mouse.x > 0.33 && mouse.y > 0.33)
 	 	// {
@@ -47,7 +47,7 @@ function RoundEarthSun()
 
 	return <spotLight ref={sunref}
 			castShadow
-			intensity={1.5}
+			intensity={0.5}
 			args={[0xffaa55, 1, 100]}
 			position={[0, 0, -4.75]}
 			penumbra={0.999}
