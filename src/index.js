@@ -25,6 +25,63 @@ import "./styles.css";
 extend({ OrbitControls });
 extend({ UnrealBloomPass })
 
+function RoundEarthSun()
+{
+	const sunref = useRef();
+	const [mycounter, setCount] = useState(0)
+
+	 useFrame(({ mouse }) => {
+		setCount(mycounter+1)
+		if (!sunref.current) return
+
+		sunref.current.position.x = Math.cos(mycounter * 0.002 ) * 5
+		sunref.current.position.z = Math.sin(mycounter * 0.002 ) * 3.5 - 1.5
+
+	 	// if (mouse.x > 0.33 && mouse.y > 0.33)
+	 	// {
+			// if (sunref.current) sunref.current.position.y += (mouse.x+mouse.y)*0.001
+	 	// } else {
+	 	// }
+	 });
+
+
+	return <spotLight ref={sunref}
+			castShadow
+			intensity={1.5}
+			args={[0xffaa55, 1, 100]}
+			position={[0, 0, -4.75]}
+			penumbra={0.999}
+		/>;
+}
+
+function RoundEarthSun2()
+{
+	const sunref = useRef();
+	const [mycounter, setCount] = useState(0)
+
+	 // useFrame(({ mouse }) => {
+		// setCount(mycounter+1)
+		// if (!sunref.current) return
+
+		// sunref.current.position.x = Math.cos(mycounter * 0.003 ) * 1.6
+		// sunref.current.position.y = Math.sin(mycounter * 0.002 ) * 1.6
+
+	 // 	// if (mouse.x > 0.33 && mouse.y > 0.33)
+	 // 	// {
+		// 	// if (sunref.current) sunref.current.position.y += (mouse.x+mouse.y)*0.001
+	 // 	// } else {
+	 // 	// }
+	 // });
+
+
+	return <spotLight ref={sunref}
+			castShadow
+			intensity={1.5}
+			args={[0xffaa55, 1, 100]}
+			position={[0, 0, -4.3]}
+			penumbra={0.9}
+		/>;
+}
 
 function SunWrapper() {
 	const sunref = useRef();
@@ -263,23 +320,21 @@ createRoot(document.getElementById('root')).render(
 			args={[0x81d0eb, 1, 100]}
 			position={[-10, 0, 0]}
 		/>
-		{true && <><spotLight
-			castShadow
-			intensity={1.5}
-			args={[0xffaa55, 1, 100]}
-			position={[0, 0, -4.75]}
-			penumbra={0.999}
-		/>
-		<spotLight
+		{true && <>
+			<spotLight 
 			intensity={0.25}
 			args={[0xffaa55, 1, 100]}
-			position={[0, 4, 5.5]}
+			position={[0, 0, 5]}
 			penumbra={0.999}
-		/></>}
+		/>
+
+		{<RoundEarthSun />}
+		{<RoundEarthSun2 />}
+		</>}
 	    <RenderInBrowser except chrome>
 	    	<fog attach="fog" args={["#55aaff", 0, 30]} />
 	        <EffectComposer multisampling={4}>
-	            <Bloom kernelSize={1} luminanceThreshold={0} luminanceSmoothing={0} intensity={0.2} />
+	            <Bloom kernelSize={1} luminanceThreshold={0} luminanceSmoothing={0} intensity={1.5} />
 	        </EffectComposer>
 	    </RenderInBrowser>
 

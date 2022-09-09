@@ -29,6 +29,27 @@ function TextBio(props)
   const [mycounter, setCount] = useState(0)
   const ref = useRef();
 
+  useFrame(({ mouse }) => {
+
+    if (!ref.current) {
+      return;
+    }
+    setCount(mycounter+1)
+
+    ref.current.rotation.z = -(mycounter * 0.002 ) + ((mouse.x) * 1)
+    // ref.current.position.z = Math.sin(mycounter * 0.002 ) 
+      // ref.current.rotation.x = -mouse.y * 0.01
+    // ref.current.position.y = Math.sin(mycounter * 0.0005 ) 
+
+
+     // if (mouse.x > 0.33 && mouse.y > 0.33)
+     // {
+      // ref.current.rotation.z = mouse.y * 2
+      // ref.current.rotation.z = mouse.y * 2
+     // }
+   });
+
+
   return <primitive ref={ref}
             
             onClick={() => {

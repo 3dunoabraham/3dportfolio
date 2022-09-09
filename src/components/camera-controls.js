@@ -24,6 +24,7 @@ export default function(props)
     if (camera.fov == 75)
     {
       camera.position.z = 6
+      camera.position.y = -0.5
       // console.log(camera.position)
       camera.fov = 100
       camera.updateProjectionMatrix()
